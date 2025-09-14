@@ -1,3 +1,29 @@
+нагенерированные в gpt диаграммы  https://chatgpt.com/c/68c57c7e-98f0-832c-b600-984beebee001
+
+первая - процессы 
+
+```mermaid
+graph TB
+    Quartz["Кварц (SiO₂)"] -->|"карботермическое восстановление"| MetSi["Металлургический кремний"]
+    Carbon["Уголь (C)"] -->|"карботермическое восстановление"| MetSi
+    MetSi -->|"процесс Сименнса (HCl, CVD)| PolySi["Поликристаллический кремний"]
+    PolySi -->|"метод Чохральского (расплав + seed)"| SingleSi["Монокристаллический кремний (ингот)"]
+    SingleSi -->|"резка и шлифовка"| Wafer["Кремниевая пластина (wafer)"]
+    Wafer -->|"термическое окисление (O₂)"| OxideLayer["Слой SiO₂ (диэлектрик)"]
+    OxideLayer -->|"нанесение фоторезиста"| PhotoResist["Фоторезист (новолак+DNQ)"]
+    PhotoResist -->|"УФ-экспонирование + проявка (TMAH)"| Pattern["Шаблон резиста на SiO₂"]
+    Pattern -->|"травление HF"| EtchedOxide["Прорезанный слой SiO₂"]
+    EtchedOxide -->|"диффузия/имплантация B, P"| DopedSi["Дозированный кремний (Si)"]
+    DopedSi -->|"CVD/депозиция диоксида"| Dielectric["Новый слой SiO₂"]
+    Dielectric -->|"CVD/резка металла (Al, Cu)"| Metal["Металлический слой (Al/Cu)"]
+    Metal -->|"литография + травление"| Interconnect["Металлические проводники"]
+    Interconnect -->|"резка Wafer"| Chip["Готовая микросхема (4×NAND)"]
+
+```
+
+Вторая - рессурсы с процессами
+
+```mermaid
 graph BT
     %% Природные ресурсы
     Quartz["Кварц\n(Назначение: источник SiO₂ — исходный минерал для получения кремния)"]
@@ -103,3 +129,113 @@ graph BT
 
     %% Финал
     Chip["Готовая микросхема (4×И-НЕ)\n(Назначение: логическая микросхема, реализует 4 инвертированных И)"]
+```
+
+тут попытка ее сократить https://chatgpt.com/c/68c63041-b18c-8332-9e7f-64987302d3b7
+
+```mermaid
+graph BT
+    %% === Resources ===
+    Quartz["Quartz<br/>(SiO₂ source)"]
+    Carbon["Carbon<br/>(reducer for Si)"]
+    Fluorite["Fluorite<br/>(HF precursor)"]
+    Bauxite["Bauxite<br/>(Al source)"]
+    CuOre["Cu Ore<br/>(Copper source)"]
+    Borax["Borax<br/>(B₂O₃ precursor)"]
+    Apatite["Apatite<br/>(Phosphorus source)"]
+    NaCl["NaCl<br/>(Chlorine source)"]
+    OilGas["Oil/Gas<br/>(Organics, solvents)"]
+    Air["Air<br/>(O₂ / N₂)"]
+
+    %% === Intermediates ===
+    MetSi["Metallurgical Si"]
+    PolySi["Polysilicon"]
+    SingleSi["Single-crystal Si"]
+    Wafer["Si Wafer"]
+    HF["HF"]
+    SiO2Layer["SiO₂ Layer"]
+    Si3N4["Si₃N₄ Layer"]
+    Novolac["Novolac Resin"]
+    DNQ["DNQ"]
+    PhotoResist["Photoresist"]
+    TMAH["TMAH"]
+    Pattern["Litho Pattern"]
+    B2H6["B₂H₆"]
+    POCl3["POCl₃"]
+    P_Si["p-type Si"]
+    N_Si["n-type Si"]
+    Al["Aluminum"]
+    Cu["Copper"]
+    MetalWires["Metal Layers"]
+    SiCl4["SiCl₄"]
+    SiH4["SiH₄"]
+    Phenol["Phenol"]
+    Formaldehyde["Formaldehyde"]
+    Solvents["Solvents"]
+    Cl2["Cl₂"]
+    HCl["HCl"]
+    NH3["NH₃"]
+    NH4OH["NH₄OH"]
+    EtchedSiO2["Etched SiO₂"]
+
+    %% === Final product ===
+    Chip["IC (4×NAND)"]
+
+    %% === Processes ===
+    Quartz -->|"Carbothermal reduction"| MetSi
+    Carbon -->|"Carbothermal reduction"| MetSi
+    MetSi -->|"Siemens process"| PolySi
+    PolySi -->|"Czochralski"| SingleSi
+    SingleSi -->|"Sawing & polishing"| Wafer
+
+    Fluorite -->|"+H₂SO₄"| HF
+    HF -->|"Etching SiO₂"| SiO2Layer
+    Wafer -->|"Oxidation / CVD O₂"| SiO2Layer
+    Air -->|"O₂ source"| SiO2Layer
+
+    OilGas -->|"Chem. synthesis"| Phenol
+    Phenol -->|"+HCHO → polymer"| Novolac
+    Novolac -->|"+DNQ"| PhotoResist
+    PhotoResist -->|"Coating wafer"| Pattern
+    TMAH -->|"Develop"| Pattern
+
+    Borax -->|"→ Boric acids"| B2H6
+    B2H6 -->|"Diffusion / implant"| P_Si
+    Apatite -->|"→ H₃PO₄ → POCl₃"| POCl3
+    POCl3 -->|"Diffusion"| N_Si
+
+    Bauxite -->|"Bayer + electrolysis"| Al
+    CuOre -->|"Smelting + electrolysis"| Cu
+    Al -->|"PVD/CVD deposition"| MetalWires
+    Cu -->|"Plating / deposition"| MetalWires
+
+    NaCl -->|"Electrolysis"| Cl2
+    Cl2 -->|"+H₂ → HCl"| HCl
+    HCl -->|"With Si → SiCl₄"| SiCl4
+    SiCl4 -->|"→ SiH₄ / PolySi"| SiH4
+    SiH4 -->|"CVD deposition"| PolySi
+    SiH4 -->|"CVD → Si/SiO₂"| Wafer
+
+    NH3 -->|"→ NH₄OH"| NH4OH
+    NH4OH -->|"RCA clean (SC-1)"| Wafer
+    NH3 -->|"CVD → Si₃N₄"| Si3N4
+    Si3N4 -->|"Isolation/barrier"| Wafer
+
+    SiO2Layer -->|"Patterning (resist + etch)"| EtchedSiO2
+    Pattern -->|"HF / RIE etch"| EtchedSiO2
+    EtchedSiO2 -->|"Implantation"| P_Si
+    EtchedSiO2 -->|"Implantation"| N_Si
+
+    P_Si -->|"Transistor formation"| Chip
+    N_Si -->|"Transistor formation"| Chip
+    MetalWires -->|"Interconnects"| Chip
+    SiO2Layer -->|"Isolation / interlayer dielectric"| Chip
+
+    PhotoResist -->|"Stripping"| Solvents
+    Solvents -->|"Cleaning"| Wafer
+
+    %% Additional flows
+    Air -->|"N₂ source"| NH3
+    OilGas -->|"→ Solvents"| Solvents
+
+```
